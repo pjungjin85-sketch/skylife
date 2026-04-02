@@ -34,43 +34,87 @@ body {
 /* ── 잠금 화면 ── */
 #lock-overlay {
   position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(135deg, #8B0000 0%, #CC0010 55%, #E60012 100%);
+  background: #F7F7F7;
   display: flex; align-items: center; justify-content: center;
+  padding: 20px;
 }
 #lock-overlay.hidden { display: none; }
 .lock-box {
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.22);
-  border-radius: 24px;
-  padding: 48px 40px 40px;
+  background: #fff;
+  border: 1px solid #E8E8E8;
+  border-top: 3px solid var(--accent);
+  border-radius: 16px;
+  padding: 44px 40px 36px;
   width: 100%; max-width: 360px;
   text-align: center;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
 }
-.lock-icon { font-size: 48px; margin-bottom: 16px; display: block; animation: pulse 2s ease-in-out infinite; }
+.lock-logo { font-size: 22px; font-weight: 900; color: #1A1A1A; letter-spacing: -.02em; margin-bottom: 20px; display: block; }
+.lock-logo span { color: var(--accent); }
+.lock-logo em { background: var(--accent); color: #fff; font-style: normal; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .04em; margin-left: 8px; vertical-align: middle; }
+.lock-icon { font-size: 40px; margin-bottom: 12px; display: block; animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-.lock-title { color:#fff; font-size:20px; font-weight:900; margin-bottom:4px; }
-.lock-sub { color:rgba(255,255,255,0.55); font-size:12px; margin-bottom:32px; }
-.lock-input-wrap { position:relative; margin-bottom:14px; }
+.lock-title { color: #1A1A1A; font-size: 18px; font-weight: 900; margin-bottom: 4px; }
+.lock-sub { color: #999999; font-size: 12px; margin-bottom: 28px; }
+.lock-input-wrap { position:relative; margin-bottom:12px; }
 .lock-input {
-  width:100%; padding:14px 48px 14px 18px;
-  border-radius:12px; border:1.5px solid rgba(255,255,255,0.25);
-  background:rgba(255,255,255,0.12); color:#fff; font-size:18px;
+  width:100%; padding:13px 48px 13px 18px;
+  border-radius:10px; border:1.5px solid #E8E8E8;
+  background:#fff; color:#1A1A1A; font-size:18px;
   font-family:'DM Mono',monospace; letter-spacing:4px;
   outline:none; text-align:center;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s;
 }
-.lock-input::placeholder { letter-spacing:2px; font-size:13px; color:rgba(255,255,255,0.4); }
-.lock-input:focus { border-color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.18); }
-.lock-input.error { border-color:#ffaaaa; animation:shake 0.4s ease; }
+.lock-input::placeholder { letter-spacing:2px; font-size:13px; color:#BBBBBB; }
+.lock-input:focus { border-color: var(--accent); }
+.lock-input.error { border-color: var(--accent); animation:shake 0.4s ease; }
 @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
-.toggle-pw { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,0.55); cursor:pointer; font-size:18px; transition:color 0.15s; }
-.toggle-pw:hover { color:#fff; }
-.lock-btn { width:100%; padding:14px; background:#fff; color:var(--accent); border:none; border-radius:12px; font-size:15px; font-weight:800; font-family:'Noto Sans KR',sans-serif; cursor:pointer; transition:all 0.18s; }
-.lock-btn:hover { background:#fff5f5; transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,0,0,0.2); }
-.lock-error { color:#ffaaaa; font-size:12px; margin-top:10px; height:16px; }
-.lock-footer { margin-top:28px; color:rgba(255,255,255,0.25); font-size:10px; letter-spacing:1px; }
+.toggle-pw { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:#BBBBBB; cursor:pointer; font-size:18px; transition:color 0.15s; }
+.toggle-pw:hover { color: var(--accent); }
+.lock-btn { width:100%; padding:13px; background:var(--accent); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:800; font-family:'Noto Sans KR',sans-serif; cursor:pointer; transition:all 0.18s; }
+.lock-btn:hover { background:#CC0010; transform:translateY(-1px); box-shadow:0 4px 16px rgba(230,0,18,0.25); }
+.lock-error { color:var(--accent); font-size:12px; margin-top:10px; height:16px; }
+.lock-footer { margin-top:24px; color:#CCCCCC; font-size:10px; letter-spacing:.5px; border-top:1px solid #F0F0F0; padding-top:16px; }
+
+/* ── 공지 팝업 ── */
+#notice-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+}
+#notice-overlay.hidden { display: none; }
+.notice-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: 16px;
+  padding: 36px 32px 28px;
+  width: 100%; max-width: 420px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  cursor: default;
+  position: relative;
+}
+.notice-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(230,0,18,.08); border: 1px solid rgba(230,0,18,.25);
+  color: var(--accent); font-size: 10px; font-weight: 700;
+  letter-spacing: .06em; padding: 3px 10px; border-radius: 3px;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.notice-title {
+  font-size: 17px; font-weight: 900; color: #1A1A1A;
+  letter-spacing: -.02em; margin-bottom: 16px;
+}
+.notice-body {
+  font-size: 14px; color: #333; line-height: 1.75;
+  border-top: 1px solid var(--border); padding-top: 16px;
+  margin-bottom: 20px; white-space: pre-line;
+}
+.notice-close-hint {
+  font-size: 11px; color: #BBBBBB; text-align: center; margin-top: 4px;
+}
 
 /* ── 헤더 ── */
 .header {
@@ -241,6 +285,7 @@ body {
 .badge-rs  { background:rgba(230,0,18,.1); color:var(--accent); }
 .badge-rm  { background:rgba(16,185,129,.12); color:#059669; }
 .badge-sky { background:rgba(245,158,11,.12); color:#d97706; }
+.badge-vit { background:#0ea5e9; color:#fff; }
 
 /* ── 결과 패널 ── */
 .result-panel {
@@ -341,6 +386,34 @@ input[type=range]::-webkit-slider-thumb:hover { transform:scale(1.2); }
 .tv-switch input:checked + .tv-slider { background:var(--accent); }
 .tv-switch input:checked + .tv-slider:before { transform:translateX(18px); }
 
+/* 혜택 정보 박스 */
+.benefit-box {
+  background: #F8FFFE;
+  border: 1px solid #E0F2FE;
+  border-left: 3px solid #0ea5e9;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin: 12px 0 4px;
+  font-size: 12px;
+}
+.benefit-box-title {
+  font-size: 10px; font-weight: 700; color: #0ea5e9;
+  letter-spacing: .06em; text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.benefit-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px solid #E0F2FE;
+  color: #444;
+}
+.benefit-row:last-child { border-bottom: none; }
+.benefit-label { color: #666; }
+.benefit-val { font-weight: 700; color: #0ea5e9; }
+.benefit-val.none { color: #BBBBBB; font-weight: 400; }
+.benefit-val.vit-o { color: #10b981; }
+.benefit-val.vit-x { color: #BBBBBB; }
+
 .disclaimer { margin-top:14px; padding:8px 10px; background:#F7F7F7; border:1px solid var(--border); border-radius:6px; font-size:9px; color:var(--text-muted); opacity:.8; line-height:1.7; }
 
 .reset-btn {
@@ -438,7 +511,17 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
     </div>
     <button class="lock-btn" onclick="checkPw()">입장하기</button>
     <div class="lock-error" id="lock-error"></div>
-    <div class="lock-footer">2026 · 03월 영업정책 · 내부용</div>
+    <div class="lock-footer">2026 · 04월 영업정책 · 내부용</div>
+  </div>
+</div>
+
+<!-- ══ 공지 팝업 ══ -->
+<div id="notice-overlay" class="hidden" onclick="closeNotice(event)">
+  <div class="notice-box">
+    <div class="notice-badge">📢 공지</div>
+    <div class="notice-title">중요 안내 사항</div>
+    <div class="notice-body">중요 안내 사항 입력</div>
+    <div class="notice-close-hint">화면 아무 곳이나 클릭하면 닫힙니다</div>
   </div>
 </div>
 
@@ -449,7 +532,7 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
       <a href="https://pjungjin85-sketch.github.io/skylife-guide/mobile_sales_guide.html" style="display:inline-flex;align-items:center;gap:5px;color:var(--accent);font-size:12px;font-weight:600;text-decoration:none;padding:4px 10px;border-radius:4px;border:1px solid rgba(230,0,18,.25);background:rgba(230,0,18,.05);transition:all .2s;">← 개통 가이드</a>
     </div>
     <div class="logo-text">kt <span>skylife</span><span class="logo-mobile-badge">MOBILE</span></div>
-    <div class="header-badge">2026 · 03월 1차 영업정책</div>
+    <div class="header-badge">2026 · 04월 영업정책</div>
     <h1>모바일 <span>수수료 계산기</span></h1>
   </div>
   <div class="header-right">
@@ -589,6 +672,27 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
           <div class="result-total-label">건당 예상 수수료 합계</div>
           <div class="result-total" id="result-total">—</div>
 
+          <!-- 혜택 정보 -->
+          <div id="benefit-info" class="benefit-box" style="display:none">
+            <div class="benefit-box-title">📡 결합·혜택 정보</div>
+            <div class="benefit-row">
+              <span class="benefit-label">누구나결합 추가 데이터</span>
+              <span class="benefit-val" id="bi-nungu">—</span>
+            </div>
+            <div class="benefit-row">
+              <span class="benefit-label">SKY UIT결합 추가 데이터</span>
+              <span class="benefit-val" id="bi-uit">—</span>
+            </div>
+            <div class="benefit-row">
+              <span class="benefit-label">프로모션 데이터 추가</span>
+              <span class="benefit-val" id="bi-promo">—</span>
+            </div>
+            <div class="benefit-row">
+              <span class="benefit-label">KT유선 알뜰폰 결합(VIT)</span>
+              <span class="benefit-val" id="bi-vit">—</span>
+            </div>
+          </div>
+
           <!-- 그레이드 -->
           <div class="grade-section-inner" id="grade-section">
             <div class="grade-divider"></div>
@@ -626,6 +730,18 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
 /* ══════════════════ 비밀번호 ══════════════════ */
 const CORRECT_HASH = "c8fd219f17e06dac4b1977f8a2f343daa1a095b61bccd1ab71db7c98e435ced4";
 async function sha256(m){ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(m)); return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''); }
+function showNoticeIfNeeded(){
+  const today=new Date().toISOString().slice(0,10);
+  if(localStorage.getItem('skylife_notice_date')!==today){
+    document.getElementById('notice-overlay').classList.remove('hidden');
+    localStorage.setItem('skylife_notice_date',today);
+  }
+}
+function closeNotice(e){
+  if(e.target===document.getElementById('notice-overlay')||e.target.closest('.notice-box')===null)
+    document.getElementById('notice-overlay').classList.add('hidden');
+}
+
 async function checkPw(){
   const v=document.getElementById('pw-input').value;
   if(!v){document.getElementById('lock-error').textContent='비밀번호를 입력해주세요';return;}
@@ -634,6 +750,7 @@ async function checkPw(){
     document.getElementById('lock-overlay').classList.add('hidden');
     sessionStorage.setItem('skylife_auth','1');
     document.getElementById('pw-input').focus && setTimeout(()=>document.getElementById('pw-input').blur(),0);
+    showNoticeIfNeeded();
   } else {
     document.getElementById('lock-error').textContent='비밀번호가 올바르지 않습니다';
     const inp=document.getElementById('pw-input');
@@ -642,61 +759,138 @@ async function checkPw(){
   }
 }
 function togglePw(){const i=document.getElementById('pw-input'),b=document.getElementById('toggle-btn');i.type=i.type==='password'?'text':'password';b.textContent=i.type==='password'?'👁':'🙈';}
-if(sessionStorage.getItem('skylife_auth')==='1') document.getElementById('lock-overlay').classList.add('hidden');
+if(sessionStorage.getItem('skylife_auth')==='1'){
+  document.getElementById('lock-overlay').classList.add('hidden');
+  showNoticeIfNeeded();
+}
 window.addEventListener('DOMContentLoaded',()=>document.getElementById('pw-input')?.focus());
 
 /* ══════════════════ 데이터 ══════════════════ */
 const PLANS = {
   "기본형": [
-    ["슬림 1.5GB/150분",5000,"RM",false],["슬림 3GB/300분",6900,"RM",false],
-    ["통화충분 1.5GB",6600,"RM",false],["통화충분 2.5GB",7700,"RM",false],
-    ["통화충분 4.5GB",8850,"RM",false],["통화충분 6.5GB",10900,"RM",false],
-    ["골드 500MB+",5900,"RM",false],["골드 2GB+",7400,"RM",false],
-    ["골드 4.0GB+",9900,"RM",false],["골드 8.0GB+",13900,"RM",false],
-    ["안심골드 2GB+",7400,"RM",false],["안심골드 4GB+",9900,"RM",false],
-    ["스쿨 2GB+",8900,"RM",false],["스쿨 4GB+",10900,"RM",false],["스쿨 8GB+",14900,"RM",false],
-    ["모두충분 1.5GB+",9900,"RM",false],["모두충분 2.5GB+",11800,"RM",false],
-    ["모두충분 4.5GB+",13200,"RM",false],["모두충분 6GB+",14900,"RM",false],
-    ["스마트데이터 10GB+",10800,"RS",false],["스마트데이터 20GB+",14100,"RS",false],
-    ["웨어러블 Watch",6600,"RS",false],
+    ["슬림 3GB/300분",5900,"RM",false,null,null,null,true],
+    ["통화 충분 1.5GB",6600,"RM",false,null,null,null,true],
+    ["통화 충분 2.5GB",7700,"RM",false,null,null,null,true],
+    ["통화 충분 4.5GB",8850,"RM",false,null,null,null,true],
+    ["통화 충분 6.5GB",10900,"RM",false,null,null,null,true],
+    ["골드 500MB+",5900,"RM",false,null,null,null,true],
+    ["골드 2GB+",5900,"RM",false,null,null,null,true],
+    ["골드 4.0GB+",9900,"RM",false,null,null,null,true],
+    ["골드 8.0GB+",13900,"RM",false,null,null,null,true],
+    ["안심 골드 2GB+",7400,"RM",false,null,null,null,true],
+    ["안심 골드 4GB+",9900,"RM",false,null,null,null,true],
+    ["스쿨 2GB+",6400,"RM",false,null,null,null,true],
+    ["스쿨 4GB+",10900,"RM",false,null,null,null,true],
+    ["스쿨 8GB+",14900,"RM",false,null,null,null,true],
+    ["모두 충분 1.5GB+",6900,"RM",false,null,null,null,true],
+    ["모두 충분 2.5GB+",11800,"RM",false,null,null,null,true],
+    ["모두 충분 4.5GB+",13200,"RM",false,null,null,null,true],
+    ["모두 충분 6GB+",14900,"RM",false,null,null,null,true],
+    ["모두 충분 10GB+",17900,"RM",false,null,null,null,true],
+    ["스마트 데이터 충분 10GB+",10800,"RS",false,null,null,null,true],
+    ["스마트 데이터 충분 20GB+",14100,"RS",false,null,null,null,true],
+    ["웨어러블 Watch",6600,"RS",false,null,null,null,false],
   ],
   "실속형": [
-    ["통화충분 10GB",13900,"RM",false],["통화충분 15GB",16900,"RM",false],["통화충분 20GB",20100,"RM",false],
-    ["SKY 데이터충분 2.2GB+",13900,"RS",true],["데이터충분 2.2GB+",11700,"RS",false],["데이터충분 5GB+",14300,"RS",false],
+    ["통화 충분 10GB",13900,"RM",false,null,null,null,true],
+    ["통화 충분 15GB",16900,"RM",false,null,null,null,true],
+    ["통화 충분 20GB",20100,"RM",false,null,null,null,true],
+    ["SKY 데이터 충분 2.2GB+/100분",13900,"RS",true,null,null,null,true],
+    ["데이터 충분 2.2GB+/100분",11700,"RS",false,null,null,null,true],
+    ["데이터 충분 5GB+/100분",14300,"RS",false,null,null,null,true],
   ],
   "7GB+": [
-    ["SKY 모두충분 7GB+(밀리)",17900,"RS",true],["SKY 모두충분 7GB+(모아진)",17900,"RS",true],
-    ["모두충분 7GB+(밀리)",16200,"RS",false],["스쿨 7GB+(밀리)",16200,"RS",false],
-    ["모두충분 7GB+(지니뮤직)",19000,"RS",false],["모두충분 7GB+(Pay_5000)",18500,"RS",false],
-    ["모두충분 7GB+(올리브영)",18500,"RS",false],["모두충분 7GB+(다이소)",18500,"RS",false],["모두충분 7GB+(후후안심)",16200,"RS",false],
+    ["SKY 모두 충분 7GB+(밀리의서재)",17900,"RS",true,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["SKY 모두 충분 7GB+(모아진)",17900,"RS",true,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["스쿨 7GB+(밀리의서재)",16200,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(밀리의서재)",16300,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(모아진)",16200,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(지니뮤직)",19000,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(Pay_5000)",18500,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(Pay_3000)",17600,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(후후안심)",16200,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(올리브영_5000)",18500,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 7GB+(다이소_5000)",18500,"RS",false,"+5GB (LTE)","+5GB (LTE)","+10GB (24개월)",true],
   ],
   "10GB+": [
-    ["SKY 모두충분 10GB+(밀리)",19900,"RS",true],["SKY 모두충분 10GB+(모아진)",19900,"RS",true],
-    ["모두충분 10GB+(밀리)",18900,"RS",false],["모두충분 10GB+(CU)",19400,"RS",false],
-    ["모두충분 10GB+(지니뮤직)",22400,"RS",false],["모두충분 10GB+(올리브영)",20300,"RS",false],["모두충분 10GB+(Pay_5000)",21400,"RS",false],
+    ["SKY 모두 충분 10GB+(밀리의서재)",19900,"RS",true,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["SKY 모두 충분 10GB+(모아진)",19900,"RS",true,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 10GB+(밀리의서재)",19000,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 10GB+(모아진)",18900,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 10GB+(CU)",19400,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 10GB+(Pay_5000)",21200,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 10GB+(올리브영_5000)",21200,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 10GB+(다이소_5000)",21200,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 10GB+(지니뮤직)",21700,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
   ],
   "15GB+": [
-    ["SKY 모두충분 15GB+(밀리)",22400,"RS",true],["SKY 모두충분 15GB+(모아진)",22400,"RS",true],
-    ["SKY 데이터충분 15GB+(CU)",26500,"RS",true],["모두충분 15GB+(밀리)",20900,"RS",false],
-    ["데이터충분 15GB+/100분",25300,"RS",false],["데이터충분 15GB+/300분",27500,"RS",false],
-    ["모두충분 15GB+(지니뮤직)",24400,"RS",false],["모두충분 15GB+(웨이브)",29300,"RS",false],
+    ["SKY 모두 충분 15GB+(밀리의서재)",22400,"RS",true,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["SKY 모두 충분 15GB+(모아진)",22400,"RS",true,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["SKY 데이터 충분 15GB+(CU)",26500,"RS",true,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["SKY 데이터 충분 15GB+(모아진)",26500,"RS",true,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["모두 충분 15GB+(밀리의서재)",21500,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 15GB+(모아진)",21400,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 15GB+(후후안심)",20900,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 15GB+(CU)",21900,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",false],
+    ["모두 충분 15GB+(Pay_5000)",23700,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 15GB+(올리브영_5000)",23700,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 15GB+(다이소_5000)",23700,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["모두 충분 15GB+(지니뮤직)",24200,"RS",false,"+10GB (LTE)","+10GB (LTE)","+10GB (24개월)",true],
+    ["데이터 충분 15GB+/100분",25300,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["데이터 충분 15GB+/100분(CU)",25300,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,false],
+    ["데이터 충분 15GB+/100분(모아진)",25300,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["데이터 충분 15GB+/100분(Pay_5000)",27800,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["데이터 충분 15GB+/100분(웨이브)",29300,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["데이터 충분 15GB+/100분(지니뮤직)",28800,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["데이터 충분 15GB+/300분",27500,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,true],
+    ["데이터 충분 15GB+/300분(CU)",27500,"RS",false,"+10GB (LTE)","+10GB (LTE)",null,false],
   ],
   "11GB+": [
-    ["SKY 모두충분 11GB+(CU)",34000,"RS",true],["SKY 모두충분 11GB+(밀리)",34000,"RS",true],["SKY 모두충분 11GB+(모아진)",34000,"RS",true],
-    ["모두충분 11GB+(밀리)",33100,"RS",false],["모두충분 11GB+(CU)",33000,"RS",false],
-    ["모두충분 11GB+(지니뮤직)",35800,"RS",false],["모두충분 11GB+(왓챠)",35900,"RS",false],
-    ["모두충분 11GB+(배달의민족)",36300,"RS",false],["모두충분 11GB+(웨이브)",36600,"RS",false],["모두충분 11GB+(멜론뮤직)",36300,"RS",false],
+    ["SKY 모두 충분 11GB+(밀리의서재)",34000,"RS",true,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["SKY 모두 충분 11GB+(모아진)",34000,"RS",true,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["SKY 모두 충분 11GB+(CU)",34000,"RS",true,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(밀리의서재)",33100,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(모아진)",33000,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(CU)",33000,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,false],
+    ["모두 충분 11GB+(후후안심)",33000,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(Pay_5000)",35300,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(올리브영_5000)",36300,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(다이소_5000)",36300,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11.0GB+(기프티쇼)",36000,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11.0GB+(지니뮤직)",35800,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(왓챠)",35900,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(배달의 민족)",36300,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(요기요)",36300,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(웨이브)",36600,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 11GB+(멜론뮤직)",36300,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,false],
   ],
   "100GB+": [
-    ["SKY 모두충분 100GB+(밀리)",39900,"RS",true],["SKY 모두충분 100GB+(CU)",39900,"RS",true],["SKY 모두충분 100GB+(모아진)",39900,"RS",true],
-    ["모두충분 100GB+(밀리)",38300,"RS",false],["모두충분 100GB+(웨이브)",41700,"RS",false],
-    ["모두충분 100GB+(Pay_5000)",41700,"RS",false],["모두충분 일5GB+(왓챠)",41100,"RS",false],
+    ["SKY 모두 충분 100GB+(밀리의서재)",39900,"RS",true,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["SKY 모두 충분 100GB+(모아진)",39900,"RS",true,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["SKY 모두 충분 100GB+(CU)",39900,"RS",true,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 100GB+(밀리의서재)",38300,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 100GB+(모아진)",38200,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 100GB+(CU)",38200,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,false],
+    ["모두 충분 100GB+(웨이브)",41700,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 100GB+(Pay_5000)",41700,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 100GB+(올리브영_5000)",41700,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 100GB+(다이소_5000)",41700,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 100GB+(지니뮤직)",42200,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
+    ["모두 충분 일5GB+(왓챠)",41100,"RS",false,"+20GB (LTE)","+20GB (LTE)",null,true],
   ],
   "5G": [
-    ["5G 통화충분 20GB",25900,"RM",false],["5G 통화충분 30GB",29900,"RM",false],
-    ["5G 모두충분 14GB+",32000,"RS",false],["5G 모두충분 50GB+",37900,"RS",false],
-    ["5G 모두충분 70GB+",39100,"RS",false],["5G 모두충분 90GB+",40300,"RS",false],
-    ["5G 모두충분 110GB+",42900,"RS",false],["5G 모두충분 200GB+",49200,"RS",false],
+    ["5G 통화 충분 20GB",25900,"RM",false,null,null,null,true],
+    ["5G 통화 충분 30GB",29900,"RM",false,null,null,null,true],
+    ["5G 모두 충분 14GB+",32000,"RS",false,null,null,null,true],
+    ["5G 모두 충분 50GB+",37900,"RS",false,"+10GB (5G)","+10GB (5G)",null,true],
+    ["5G 모두 충분 70GB+",39100,"RS",false,"+10GB (5G)","+10GB (5G)",null,true],
+    ["5G 모두 충분 70GB+(밀리의 서재)",39100,"RS",false,"+10GB (5G)","+10GB (5G)",null,true],
+    ["5G 모두 충분 90GB+",40300,"RS",false,"+10GB (5G)","+10GB (5G)",null,true],
+    ["5G 모두 충분 90GB+(밀리의 서재)",40300,"RS",false,"+10GB (5G)","+10GB (5G)",null,true],
+    ["5G 모두 충분 110GB+",42900,"RS",false,"+20GB (5G)","+20GB (5G)",null,true],
+    ["5G 모두 충분 110GB+(밀리의 서재)",42900,"RS",false,"+20GB (5G)","+20GB (5G)",null,true],
+    ["5G 모두 충분 200GB+",49200,"RS",false,"+20GB (5G)","+20GB (5G)",null,true],
+    ["5G 모두 충분 200GB+(밀리의 서재)",49200,"RS",false,"+20GB (5G)","+20GB (5G)",null,true],
   ]
 };
 
@@ -711,15 +905,16 @@ const 배정FEE = {"기본형":10000,"실속형":15000,"7GB+":10000,"10GB+":1000
 function getTVFee(g,p){ if(g==="기본형") return p>=10000?30000:20000; return 30000; }
 
 const SKY_EXTRA = {
-  "SKY 데이터충분 2.2GB+":20000,
-  "SKY 모두충분 7GB+(밀리)":20000,"SKY 모두충분 7GB+(모아진)":20000,
-  "SKY 모두충분 10GB+(밀리)":20000,"SKY 모두충분 10GB+(모아진)":20000,
-  "SKY 데이터충분 15GB+(CU)":20000,"SKY 모두충분 15GB+(밀리)":20000,"SKY 모두충분 15GB+(모아진)":20000,
-  "SKY 모두충분 11GB+(CU)":20000,"SKY 모두충분 11GB+(밀리)":20000,"SKY 모두충분 11GB+(모아진)":20000,
-  "SKY 모두충분 100GB+(밀리)":20000,"SKY 모두충분 100GB+(CU)":20000,
-  "5G 통화충분 20GB":20000,"5G 통화충분 30GB":20000,
+  "SKY 데이터 충분 2.2GB+":20000,
+  "SKY 모두 충분 7GB+(밀리의서재)":20000,"SKY 모두 충분 7GB+(모아진)":20000,
+  "SKY 모두 충분 10GB+(밀리의서재)":20000,"SKY 모두 충분 10GB+(모아진)":20000,
+  "SKY 데이터 충분 15GB+(CU)":20000,"SKY 데이터 충분 15GB+(모아진)":20000,
+  "SKY 모두 충분 15GB+(밀리의서재)":20000,"SKY 모두 충분 15GB+(모아진)":20000,
+  "SKY 모두 충분 11GB+(밀리의서재)":20000,"SKY 모두 충분 11GB+(CU)":20000,"SKY 모두 충분 11GB+(모아진)":20000,
+  "SKY 모두 충분 100GB+(밀리의서재)":20000,"SKY 모두 충분 100GB+(모아진)":20000,"SKY 모두 충분 100GB+(CU)":20000,
+  "5G 통화 충분 20GB":20000,"5G 통화 충분 30GB":20000,
 };
-const RETAIL_EXTRA_LIST = ["골드 2GB+","골드 4.0GB+","골드 8.0GB+","모두충분 2.5GB+","모두충분 10GB+(밀리)"];
+const RETAIL_EXTRA_LIST = ["골드 2GB+","골드 4.0GB+","골드 8.0GB+","모두 충분 2.5GB+","모두 충분 10GB+(밀리의서재)"];
 
 const GRADE_POLICY = {
   "소매": [{min:130,label:"130건↑",fee:25000},{min:80,label:"80~129건",fee:20000},{min:50,label:"50~79건",fee:10000},{min:0,label:"50건 미만",fee:0}],
@@ -729,7 +924,7 @@ const GRADE_POLICY = {
 };
 
 /* ══════════════════ 상태 ══════════════════ */
-let S = { agency:null, customer:null, join:null, plan:null, planGroup:null, planPrice:0, planRS:null, gradeCount:0, tvCombined:false };
+let S = { agency:null, customer:null, join:null, plan:null, planGroup:null, planPrice:0, planRS:null, gradeCount:0, tvCombined:false, planNungu:null, planUIT:null, planPromo:null, planVIT:false };
 let activeGroup = null;
 
 /* ══════════════════ 핸들러 ══════════════════ */
@@ -762,8 +957,9 @@ function selectGroup(g){
   document.querySelectorAll('.group-tab').forEach(t=>t.classList.toggle('active',t.dataset.g===g));
   buildPlanGrid(g);
 }
-function selectPlan(name,group,price,rs){
+function selectPlan(name,group,price,rs,nungu,uit,promo,vit){
   S.plan=name; S.planGroup=group; S.planPrice=price; S.planRS=rs;
+  S.planNungu=nungu; S.planUIT=uit; S.planPromo=promo; S.planVIT=!!vit;
   document.querySelectorAll('.plan-btn').forEach(b=>b.classList.remove('selected'));
   document.querySelector(`[data-plan="${CSS.escape(name)}"]`)?.classList.add('selected');
   updateResult();
@@ -802,14 +998,15 @@ function buildGroupTabs(){
 function buildPlanGrid(group){
   const grid=document.getElementById('plan-grid');
   grid.innerHTML='';
-  (PLANS[group]||[]).forEach(([name,price,rs,sky])=>{
+  (PLANS[group]||[]).forEach(([name,price,rs,sky,nungu,uit,promo,vit])=>{
     const b=document.createElement('button');
     b.className='plan-btn'+(S.plan===name?' selected':'');
     b.setAttribute('data-plan',name);
     const skyBadge=sky?`<span class="plan-badge badge-sky">SKY</span>`:'';
     const rsBadge=`<span class="plan-badge ${rs==='RS'?'badge-rs':'badge-rm'}">${rs}</span>`;
-    b.innerHTML=`<span class="plan-name">${name}${skyBadge}${rsBadge}</span><span class="plan-price">${price.toLocaleString()}원/월</span>`;
-    b.onclick=()=>selectPlan(name,group,price,rs);
+    const vitBadge=vit?`<span class="plan-badge badge-vit">VIT</span>`:'';
+    b.innerHTML=`<span class="plan-name">${name}${skyBadge}${rsBadge}${vitBadge}</span><span class="plan-price">${price.toLocaleString()}원/월</span>`;
+    b.onclick=()=>selectPlan(name,group,price,rs,nungu,uit,promo,vit);
     grid.appendChild(b);
   });
 }
@@ -876,9 +1073,33 @@ function updateResult(){
     hrAmount.className='hr-amount empty'; hrAmount.textContent='조건 선택 중…';
     hrGrade.textContent='';
     mfbAmount.className='mfb-amount empty'; mfbAmount.textContent='조건 선택 중…';
-    mfbGrade.textContent=''; return;
+    mfbGrade.textContent='';
+    document.getElementById('benefit-info').style.display='none';
+    return;
   }
   empty.style.display='none'; content.style.display='block';
+
+  // 혜택 정보 표시
+  const bInfo = document.getElementById('benefit-info');
+  if(S.planNungu||S.planUIT||S.planPromo||S.planVIT!==null){
+    bInfo.style.display='block';
+    const setBI=(id,val,isVit)=>{
+      const el=document.getElementById(id);
+      if(isVit){
+        el.className='benefit-val '+(val?'vit-o':'vit-x');
+        el.textContent=val?'가능':'불가';
+      } else {
+        el.className='benefit-val'+(val?'':' none');
+        el.textContent=val||'—';
+      }
+    };
+    setBI('bi-nungu',S.planNungu,false);
+    setBI('bi-uit',S.planUIT,false);
+    setBI('bi-promo',S.planPromo,false);
+    setBI('bi-vit',S.planVIT,true);
+  } else {
+    bInfo.style.display='none';
+  }
 
   const rows=[];
   let total=0;
@@ -954,7 +1175,7 @@ function resetSlider(){
 }
 
 function resetAll(){
-  S={agency:null,customer:null,join:null,plan:null,planGroup:null,planPrice:0,planRS:null,gradeCount:0};
+  S={agency:null,customer:null,join:null,plan:null,planGroup:null,planPrice:0,planRS:null,gradeCount:0,planNungu:null,planUIT:null,planPromo:null,planVIT:false};
   document.querySelectorAll('.opt-btn').forEach(b=>b.classList.remove('selected'));
   ['step2','step3'].forEach(id=>document.getElementById(id).classList.add('locked'));
   document.getElementById('step4').classList.add('locked');
