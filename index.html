@@ -34,43 +34,87 @@ body {
 /* ── 잠금 화면 ── */
 #lock-overlay {
   position: fixed; inset: 0; z-index: 9999;
-  background: linear-gradient(135deg, #8B0000 0%, #CC0010 55%, #E60012 100%);
+  background: #F7F7F7;
   display: flex; align-items: center; justify-content: center;
+  padding: 20px;
 }
 #lock-overlay.hidden { display: none; }
 .lock-box {
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.22);
-  border-radius: 24px;
-  padding: 48px 40px 40px;
+  background: #fff;
+  border: 1px solid #E8E8E8;
+  border-top: 3px solid var(--accent);
+  border-radius: 16px;
+  padding: 44px 40px 36px;
   width: 100%; max-width: 360px;
   text-align: center;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 24px 80px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.08);
 }
-.lock-icon { font-size: 48px; margin-bottom: 16px; display: block; animation: pulse 2s ease-in-out infinite; }
+.lock-logo { font-size: 22px; font-weight: 900; color: #1A1A1A; letter-spacing: -.02em; margin-bottom: 20px; display: block; }
+.lock-logo span { color: var(--accent); }
+.lock-logo em { background: var(--accent); color: #fff; font-style: normal; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 3px; letter-spacing: .04em; margin-left: 8px; vertical-align: middle; }
+.lock-icon { font-size: 40px; margin-bottom: 12px; display: block; animation: pulse 2s ease-in-out infinite; }
 @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.08)} }
-.lock-title { color:#fff; font-size:20px; font-weight:900; margin-bottom:4px; }
-.lock-sub { color:rgba(255,255,255,0.55); font-size:12px; margin-bottom:32px; }
-.lock-input-wrap { position:relative; margin-bottom:14px; }
+.lock-title { color: #1A1A1A; font-size: 18px; font-weight: 900; margin-bottom: 4px; }
+.lock-sub { color: #999999; font-size: 12px; margin-bottom: 28px; }
+.lock-input-wrap { position:relative; margin-bottom:12px; }
 .lock-input {
-  width:100%; padding:14px 48px 14px 18px;
-  border-radius:12px; border:1.5px solid rgba(255,255,255,0.25);
-  background:rgba(255,255,255,0.12); color:#fff; font-size:18px;
+  width:100%; padding:13px 48px 13px 18px;
+  border-radius:10px; border:1.5px solid #E8E8E8;
+  background:#fff; color:#1A1A1A; font-size:18px;
   font-family:'DM Mono',monospace; letter-spacing:4px;
   outline:none; text-align:center;
-  transition: border-color 0.2s, background 0.2s;
+  transition: border-color 0.2s;
 }
-.lock-input::placeholder { letter-spacing:2px; font-size:13px; color:rgba(255,255,255,0.4); }
-.lock-input:focus { border-color:rgba(255,255,255,0.6); background:rgba(255,255,255,0.18); }
-.lock-input.error { border-color:#ffaaaa; animation:shake 0.4s ease; }
+.lock-input::placeholder { letter-spacing:2px; font-size:13px; color:#BBBBBB; }
+.lock-input:focus { border-color: var(--accent); }
+.lock-input.error { border-color: var(--accent); animation:shake 0.4s ease; }
 @keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
-.toggle-pw { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:rgba(255,255,255,0.55); cursor:pointer; font-size:18px; transition:color 0.15s; }
-.toggle-pw:hover { color:#fff; }
-.lock-btn { width:100%; padding:14px; background:#fff; color:var(--accent); border:none; border-radius:12px; font-size:15px; font-weight:800; font-family:'Noto Sans KR',sans-serif; cursor:pointer; transition:all 0.18s; }
-.lock-btn:hover { background:#fff5f5; transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,0,0,0.2); }
-.lock-error { color:#ffaaaa; font-size:12px; margin-top:10px; height:16px; }
-.lock-footer { margin-top:28px; color:rgba(255,255,255,0.25); font-size:10px; letter-spacing:1px; }
+.toggle-pw { position:absolute; right:14px; top:50%; transform:translateY(-50%); background:none; border:none; color:#BBBBBB; cursor:pointer; font-size:18px; transition:color 0.15s; }
+.toggle-pw:hover { color: var(--accent); }
+.lock-btn { width:100%; padding:13px; background:var(--accent); color:#fff; border:none; border-radius:10px; font-size:15px; font-weight:800; font-family:'Noto Sans KR',sans-serif; cursor:pointer; transition:all 0.18s; }
+.lock-btn:hover { background:#CC0010; transform:translateY(-1px); box-shadow:0 4px 16px rgba(230,0,18,0.25); }
+.lock-error { color:var(--accent); font-size:12px; margin-top:10px; height:16px; }
+.lock-footer { margin-top:24px; color:#CCCCCC; font-size:10px; letter-spacing:.5px; border-top:1px solid #F0F0F0; padding-top:16px; }
+
+/* ── 공지 팝업 ── */
+#notice-overlay {
+  position: fixed; inset: 0; z-index: 10000;
+  background: rgba(0,0,0,0.45);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  cursor: pointer;
+}
+#notice-overlay.hidden { display: none; }
+.notice-box {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: 16px;
+  padding: 36px 32px 28px;
+  width: 100%; max-width: 420px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+  cursor: default;
+  position: relative;
+}
+.notice-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(230,0,18,.08); border: 1px solid rgba(230,0,18,.25);
+  color: var(--accent); font-size: 10px; font-weight: 700;
+  letter-spacing: .06em; padding: 3px 10px; border-radius: 3px;
+  text-transform: uppercase; margin-bottom: 14px;
+}
+.notice-title {
+  font-size: 17px; font-weight: 900; color: #1A1A1A;
+  letter-spacing: -.02em; margin-bottom: 16px;
+}
+.notice-body {
+  font-size: 14px; color: #333; line-height: 1.75;
+  border-top: 1px solid var(--border); padding-top: 16px;
+  margin-bottom: 20px; white-space: pre-line;
+}
+.notice-close-hint {
+  font-size: 11px; color: #BBBBBB; text-align: center; margin-top: 4px;
+}
 
 /* ── 헤더 ── */
 .header {
@@ -442,6 +486,16 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
   </div>
 </div>
 
+<!-- ══ 공지 팝업 ══ -->
+<div id="notice-overlay" class="hidden" onclick="closeNotice(event)">
+  <div class="notice-box">
+    <div class="notice-badge">📢 공지</div>
+    <div class="notice-title">중요 안내 사항</div>
+    <div class="notice-body">중요 안내 사항 입력</div>
+    <div class="notice-close-hint">화면 아무 곳이나 클릭하면 닫힙니다</div>
+  </div>
+</div>
+
 <!-- ══ 헤더 ══ -->
 <div class="header">
   <div class="header-left">
@@ -626,6 +680,18 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
 /* ══════════════════ 비밀번호 ══════════════════ */
 const CORRECT_HASH = "c8fd219f17e06dac4b1977f8a2f343daa1a095b61bccd1ab71db7c98e435ced4";
 async function sha256(m){ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(m)); return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''); }
+function showNoticeIfNeeded(){
+  const today=new Date().toISOString().slice(0,10);
+  if(localStorage.getItem('skylife_notice_date')!==today){
+    document.getElementById('notice-overlay').classList.remove('hidden');
+    localStorage.setItem('skylife_notice_date',today);
+  }
+}
+function closeNotice(e){
+  if(e.target===document.getElementById('notice-overlay')||e.target.closest('.notice-box')===null)
+    document.getElementById('notice-overlay').classList.add('hidden');
+}
+
 async function checkPw(){
   const v=document.getElementById('pw-input').value;
   if(!v){document.getElementById('lock-error').textContent='비밀번호를 입력해주세요';return;}
@@ -634,6 +700,7 @@ async function checkPw(){
     document.getElementById('lock-overlay').classList.add('hidden');
     sessionStorage.setItem('skylife_auth','1');
     document.getElementById('pw-input').focus && setTimeout(()=>document.getElementById('pw-input').blur(),0);
+    showNoticeIfNeeded();
   } else {
     document.getElementById('lock-error').textContent='비밀번호가 올바르지 않습니다';
     const inp=document.getElementById('pw-input');
@@ -642,7 +709,10 @@ async function checkPw(){
   }
 }
 function togglePw(){const i=document.getElementById('pw-input'),b=document.getElementById('toggle-btn');i.type=i.type==='password'?'text':'password';b.textContent=i.type==='password'?'👁':'🙈';}
-if(sessionStorage.getItem('skylife_auth')==='1') document.getElementById('lock-overlay').classList.add('hidden');
+if(sessionStorage.getItem('skylife_auth')==='1'){
+  document.getElementById('lock-overlay').classList.add('hidden');
+  showNoticeIfNeeded();
+}
 window.addEventListener('DOMContentLoaded',()=>document.getElementById('pw-input')?.focus());
 
 /* ══════════════════ 데이터 ══════════════════ */
