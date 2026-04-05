@@ -518,12 +518,12 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
 </div>
 
 <!-- ══ 공지 팝업 ══ -->
-<div id="notice-overlay" class="hidden">
-  <div class="notice-box" onclick="closeNotice()">
+<div id="notice-overlay" class="hidden" onclick="closeNotice()">
+  <div class="notice-box" onclick="event.stopPropagation()">
     <div class="notice-badge">📢 공지</div>
     <div class="notice-title">2026년 04월 정책 안내</div>
     <div class="notice-body">2026년 4월 정책으로 업데이트 되었습니다.</div>
-    <div class="notice-close-hint">팝업을 클릭하면 닫힙니다</div>
+    <div class="notice-close-hint">아무 곳이나 클릭하면 닫힙니다</div>
   </div>
 </div>
 
