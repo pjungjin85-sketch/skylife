@@ -738,7 +738,7 @@ footer{text-align:center;padding:24px 20px;font-size:11px;color:#999999;border-t
  *   3. 아래 CORRECT_HASH 값을 복사한 해시값으로 교체 후 저장 & 푸시
  *
  * ══════════════════════════════════════════════ */
-const CORRECT_HASH = "c8fd219f17e06dac4b1977f8a2f343daa1a095b61bccd1ab71db7c98e435ced4";
+const CORRECT_HASH = "e20ef9b594a57e2eef2871a1e6e5d53cb8cc74d06afe06b7124b1edc219e5ac0";
 async function sha256(m){ const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(m)); return Array.from(new Uint8Array(b)).map(x=>x.toString(16).padStart(2,'0')).join(''); }
 function showNoticeIfNeeded(){
   const today=new Date().toISOString().slice(0,10);
